@@ -1,0 +1,111 @@
+[data-testid="stVerticalBlock"] {
+    align-items: center;
+}
+
+/* Main header */
+.main-header {
+    font-size: 3rem;
+    color: #fe8d59;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+/* Subheader */
+.sub-header {
+    font-size: 1.25rem;
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+}
+
+[data-testid="stSidebarNavItems"] {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+[data-testid="stSidebarNavLinkContainer"] {
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    display: inline-block;
+    text-align: center;
+    font-weight: bold;
+    border: 1px solid #ff945f73;
+    border-radius: 2px;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: 0.3s ease all;
+    z-index: 1;
+    width: 100%
+}
+
+[data-testid="stSidebarNavLinkContainer"]:before {
+    transition: 0.5s all ease;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    opacity: 0;
+    content: '';
+    background-color: #fbbfa18a;
+    z-index: -1;
+}
+
+[data-testid="stSidebarNavLinkContainer"]:hover,
+[data-testid="stSidebarNavLinkContainer"]:focus {
+    color: white;
+    border: 3px solid #eb7135;
+}
+
+[data-testid="stSidebarNavLinkContainer"]:hover:before,
+[data-testid="stSidebarNavLinkContainer"]:focus:before {
+    transition: 0.5s all ease;
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+
+[data-testid="stSidebarNavLinkContainer"]:active {
+    transform: scale(0.9);
+}
+
+[data-testid="stSidebarNavLink"] {
+    width: 100%;
+    border-radius: 0;
+    height: 2rem;
+}
+
+[data-testid="stSidebarNavLink"]:hover {
+    background-color: transparent;
+}
+
+[data-testid="stSidebarNavLink"]:visited {
+    background-color: #ff8c5d;
+}
+
+[data-testid="stNumberInputStepDown"] {
+    display: None;
+}
+
+[data-testid="stNumberInputStepUp"] {
+    display: None;
+}
+
+.st-key-data_download {
+    display: flex;
+    flex-direction: row;
+    width: 25rem;
+    align-items: end;
+    gap: 2rem;
+    margin: 10px;
+    height: 3rem;
+}
+
+.st-key-data_download_btn {
+    width: 15rem;
+}

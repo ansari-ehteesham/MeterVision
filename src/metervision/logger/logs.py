@@ -13,7 +13,7 @@ LOG_FILE_PATH = os.path.join(log_path, f"{LOG_FILE}.log")
 logging.basicConfig(
     format=logging_format,
     level=logging.INFO,
-    stream= [
+    handlers= [
         logging.StreamHandler(),
         logging.FileHandler(filename=LOG_FILE_PATH)
     ]
