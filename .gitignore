@@ -9,8 +9,12 @@ wheels/
 # Virtual environments
 .venv
 
-# removing the environment files
+# environment files
 .env
 
 # Extra Data Folder
 Raw Data/
+
+# Models
+custom models/
+*.pt

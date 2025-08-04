@@ -1,0 +1,35 @@
+[2025-08-05 00:04:02,866]: INFO: common : YAML file Loaded Successfully
+[2025-08-05 00:04:02,867]: INFO: common : YAML file Loaded Successfully
+[2025-08-05 00:04:16,681]: INFO: application : Environment Variables are Loaded Successfully
+[2025-08-05 00:04:17,156]: INFO: roi_model : Trying to Load the Model
+[2025-08-05 00:04:18,367]: INFO: roi_model : ROI Model Loaded Successfully (time 1.199s)
+[2025-08-05 00:05:34,379]: INFO: common : YAML file Loaded Successfully
+[2025-08-05 00:05:34,379]: INFO: common : YAML file Loaded Successfully
+[2025-08-05 00:05:36,135]: INFO: application : Environment Variables are Loaded Successfully
+[2025-08-05 00:05:36,233]: INFO: roi_model : Trying to Load the Model
+[2025-08-05 00:05:36,594]: INFO: roi_model : ROI Model Loaded Successfully (time 0.37s)
+[2025-08-05 00:06:10,231]: INFO: application : Meter Image has been Uploaded
+[2025-08-05 00:06:18,029]: INFO: application : Meter Image has been Uploaded
+[2025-08-05 00:06:18,029]: INFO: application : Prediction has been Started....
+[2025-08-05 00:06:18,233]: INFO: common : Image Converted into Numpy Array
+[2025-08-05 00:06:18,233]: INFO: roi_model : Finding Display Bounding Box
+[2025-08-05 00:06:38,711]: INFO: roi_model : Display Bounding Box Found Successfully (time 20.476s)
+[2025-08-05 00:06:38,715]: INFO: roi_model : Drawn Rectangle Bounding Box on the Image
+[2025-08-05 00:06:38,715]: INFO: roi_model : Trying to Extract Display ROI
+[2025-08-05 00:06:38,716]: INFO: roi_model : ROI Extraction Completed Successfully
+[2025-08-05 00:06:38,717]: INFO: roi_model : Extracted ROI Resized Completed
+[2025-08-05 00:08:46,553]: INFO: common : YAML file Loaded Successfully
+[2025-08-05 00:08:46,554]: INFO: common : YAML file Loaded Successfully
+[2025-08-05 00:08:48,310]: INFO: application : Environment Variables are Loaded Successfully
+[2025-08-05 00:08:48,418]: INFO: roi_model : Trying to Load the Model
+[2025-08-05 00:08:48,844]: INFO: roi_model : ROI Model Loaded Successfully (time 0.44s)
+[2025-08-05 00:09:02,585]: INFO: application : Meter Image has been Uploaded
+[2025-08-05 00:09:03,586]: INFO: application : Meter Image has been Uploaded
+[2025-08-05 00:09:03,587]: INFO: application : Prediction has been Started....
+[2025-08-05 00:09:03,611]: INFO: common : Image Converted into Numpy Array
+[2025-08-05 00:09:03,611]: INFO: roi_model : Finding Display Bounding Box
+[2025-08-05 00:09:05,985]: INFO: roi_model : Display Bounding Box Found Successfully (time 2.372s)
+[2025-08-05 00:09:05,986]: INFO: roi_model : Drawn Rectangle Bounding Box on the Image
+[2025-08-05 00:09:05,986]: INFO: roi_model : Trying to Extract Display ROI
+[2025-08-05 00:09:05,986]: INFO: roi_model : ROI Extraction Completed Successfully
+[2025-08-05 00:09:05,986]: INFO: roi_model : Extracted ROI Resized Completed
