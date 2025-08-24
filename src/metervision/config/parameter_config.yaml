@@ -1,3 +1,7 @@
-roi_resized:
+display_roi_resized:
   resized_width: 600
   resized_height: 250
+
+reading_roi_resized:
+  resized_width: 600
+  resized_height: 250  

@@ -1,7 +1,6 @@
+import logging
 import os
 from datetime import datetime
-import logging
-
 
 logging_format = "[%(asctime)s]: %(levelname)s: %(module)s : %(message)s"
 LOG_FILE = f"{datetime.now().strftime("%m_%d_%Y")}"
@@ -13,8 +12,5 @@ LOG_FILE_PATH = os.path.join(log_path, f"{LOG_FILE}.log")
 logging.basicConfig(
     format=logging_format,
     level=logging.INFO,
-    handlers= [
-        logging.StreamHandler(),
-        logging.FileHandler(filename=LOG_FILE_PATH)
-    ]
+    handlers=[logging.StreamHandler(), logging.FileHandler(filename=LOG_FILE_PATH)],
 )

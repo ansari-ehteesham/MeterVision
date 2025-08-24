@@ -14,7 +14,19 @@ wheels/
 
 # Extra Data Folder
 Raw Data/
+artifacts/
+*.png
+*.jpg
+*.jpeg
 
 # Models
 custom models/
 *.pt
+
+# log file
+logs/
+*.log
+
+# notebook
+notebook/
+*.ipynb
