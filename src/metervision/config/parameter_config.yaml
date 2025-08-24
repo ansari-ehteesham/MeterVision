@@ -4,4 +4,7 @@ display_roi_resized:
 
 reading_roi_resized:
   resized_width: 600
-  resized_height: 250  
+  resized_height: 250
+
+trocr_model:
+  cpu_num_threads: 1

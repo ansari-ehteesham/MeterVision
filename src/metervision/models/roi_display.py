@@ -1,3 +1,11 @@
+"""
+Display ROI model wrapper.
+
+This module wraps a YOLO model (Ultralytics) configured for oriented bounding boxes
+(task="obb") to detect the meter display. It exposes methods to detect the display
+polygon and to extract a resized display image using postprocessing utilities.
+"""
+
 import sys
 import time
 
@@ -9,39 +17,85 @@ from metervision.logger.logs import logging
 from metervision.utils.roi_postprocessing import extract_roi
 
 
-class DisplayROIModel:
+class DisplayDetector:
+    """
+    Wrapper for the YOLO model that locates the meter display (oriented bounding box).
+
+    Parameters
+    ----------
+    model_path : str
+        Path to the YOLO model weights / file to load.
+    params : object
+        Parameter object (from config) containing keys like display_roi_resized.width/height.
+    """
+
     def __init__(self, model_path, params):
         self.params = params
         try:
             start_time = time.perf_counter()
             logging.info("Trying to Load the Model")
+
+            # Use YOLO with 'obb' task for oriented bounding boxes
             self.model = YOLO(model=model_path, task="obb", verbose=True)
+
             elapsed = round(time.perf_counter() - start_time, 3)
             logging.info(f"Display ROI Model Loaded Successfully (time {elapsed}s)")
         except Exception as e:
             raise CustomException(str(e), e)
 
-    def detect_display(self, org_img_arr):
+    def detect_display(self, image: np.ndarray) -> np.ndarray:
+        """
+        Run the detector and return a polygon representing the display OBB.
+
+         Parameters
+         ----------
+         image : ndarray
+             Input image array.
+
+         Returns
+         -------
+         polygon: np.ndarray
+             Polygon coordinates (int32) suitable for extract_roi.
+        """
+
         try:
             start_time = time.perf_counter()
             logging.info("Finding Display Bounding Box")
-            results = self.model(org_img_arr)
+            results = self.model(image)
             elapsed = round(time.perf_counter() - start_time, 3)
             logging.info(f"Display Bounding Box Found Successfully (time {elapsed}s)")
 
+            # The Ultraytics results contain oriented bbox coords. We iterate over results
+            # and create a polygon in the shape expected by extract_roi.
             for result in results:
+                # result.obb.xyxyxyxy likely contains 8 numbers (x1,y1,...,x4,y4)
                 polygon_obb = result.obb.xyxyxyxy.numpy()
-                reshaped_ploygon = polygon_obb.reshape((-1, 1, 2)).astype(np.int32)
+                polygon = polygon_obb.reshape((-1, 1, 2)).astype(np.int32)
 
-            return reshaped_ploygon
+            return polygon
         except Exception as e:
             raise CustomException(str(e), sys)
 
-    def display_roi_prediction(self, img_arr):
-        width = self.params.display_roi_resized.width
-        height = self.params.display_roi_resized.height
+    def extract_display_roi(self, img: np.ndarray) -> np.ndarray:
+        """
+        Full flow for display ROI extraction:
+        - Detect the display polygon.
+        - Extract and resize the ROI using `extract_roi`.
 
-        bb_cord = self.detect_display(org_img_arr=img_arr.copy())
-        display_arr = extract_roi(img_arr, bb_cord, (width, height), "Display")
+        Parameters
+        ----------
+        img : ndarray
+            Input image array.
 
-        return display_arr
+        Returns
+        -------
+        display_image: ndarray
+            Resized display ROI image array.
+        """
+        target_w = self.params.resized_width
+        target_h = self.params.resized_height
+
+        polygon = self.detect_display(image=img.copy())
+        display_image = extract_roi(img, polygon, (target_w, target_h), "Display")
+
+        return display_image

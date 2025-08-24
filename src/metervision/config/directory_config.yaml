@@ -1,4 +1,4 @@
 sidebar_css: style\sidebar_style.css
 display_roi_model: custom models\display_roi_model.pt
 reading_roi_model: custom models\reading_roi_model.pt
-ocr_model: custom models\ocr_model
+trocr_model: custom models\ocr_model
