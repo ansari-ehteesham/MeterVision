@@ -65,12 +65,18 @@ class DisplayDetector:
             elapsed = round(time.perf_counter() - start_time, 3)
             logging.info(f"Display Bounding Box Found Successfully (time {elapsed}s)")
 
-            # The Ultraytics results contain oriented bbox coords. We iterate over results
-            # and create a polygon in the shape expected by extract_roi.
             for result in results:
-                # result.obb.xyxyxyxy likely contains 8 numbers (x1,y1,...,x4,y4)
-                polygon_obb = result.obb.xyxyxyxy.numpy()
-                polygon = polygon_obb.reshape((-1, 1, 2)).astype(np.int32)
+                if result:
+                    # getting highest confident boxes
+                    conf_lst = result.obb.conf.tolist()
+                    idx_max_conf = conf_lst.index(max(conf_lst))
+
+                    # result.obb.xyxyxyxy likely contains 8 numbers (x1,y1,...,x4,y4)
+                    polygon_obb = result.obb.xyxyxyxy[idx_max_conf].numpy()
+                    polygon = polygon_obb.reshape((-1, 1, 2)).astype(np.int32)
+                else:
+                    logging.warning("Display is not Detected")
+                    polygon = None
 
             return polygon
         except Exception as e:
@@ -96,6 +102,8 @@ class DisplayDetector:
         target_h = self.params.resized_height
 
         polygon = self.detect_display(image=img.copy())
-        display_image = extract_roi(img, polygon, (target_w, target_h), "Display")
-
-        return display_image
+        if polygon.any():
+            display_image = extract_roi(img, polygon, (target_w, target_h), "Display")
+            return display_image
+        else:
+            return img

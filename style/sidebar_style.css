@@ -40,7 +40,8 @@
     text-decoration: none;
     transition: 0.3s ease all;
     z-index: 1;
-    width: 100%
+    width: 100%;
+    margin: 10px 0px;
 }
 
 [data-testid="stSidebarNavLinkContainer"]:before {

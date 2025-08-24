@@ -65,11 +65,17 @@ class ReadingDetector:
             elapsed = round(time.perf_counter() - start_time, 3)
             logging.info(f"Reading Bounding Box Found Successfully (time {elapsed}s)")
 
-            # Results[0].boxes yields boxes for first (and often only) image passed.
-            # We iterate and reshape to the format expected by extract_roi.
             for result in results[0].boxes:
-                polygon_box = result.xyxy.numpy()  # axis-aligned box coords
-                polygon = polygon_box.reshape((-1, 1, 2)).astype(np.int32)
+                if result:
+                    # getting highest confident boxes
+                    conf_lst = result.conf.tolist()
+                    idx_max_conf = conf_lst.index(max(conf_lst))
+
+                    polygon_box = result.xyxy[idx_max_conf].numpy()  # axis-aligned box coords
+                    polygon = polygon_box.reshape((-1, 1, 2)).astype(np.int32)
+                else:
+                    logging.warning("Display is not Detected")
+                    polygon = None
 
             return polygon
         except Exception as exc:
@@ -94,6 +100,8 @@ class ReadingDetector:
         target_h = self.params.resized_height
 
         polygon = self.detect_reading(image=img.copy())
-        reading_image = extract_roi(img, polygon, (target_w, target_h), "Reading")
-
-        return reading_image
+        if polygon.any():
+            reading_image = extract_roi(img, polygon, (target_w, target_h), "Reading")
+            return reading_image
+        else:
+            return img
